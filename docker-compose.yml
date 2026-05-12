@@ -19,5 +19,14 @@ services:
       - "6379:6379"
     command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
 
+  app:
+    build: .
+    container_name: taskmanager-backend
+    ports: 
+      - "8080:8080"
+    depends_on: 
+      - postgres
+      - redis
+
 volumes:
   pgdata:
